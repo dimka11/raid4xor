@@ -55,6 +55,8 @@ void createFiles()
 	std::ofstream d4("d4", std::ios::out | std::ios::binary | std::ios::app);
 	d4.write(xor_, len_);
 	d4.close();
+
+	std::cout << "files with test data was created\n";
 }
 
 void readFiles(const FilesExists* fe) {
@@ -86,10 +88,12 @@ void readFiles(const FilesExists* fe) {
 		std::ofstream d4("d4", std::ios::out | std::ios::binary | std::ios::app);
 		d4.write(xor_, len);
 		d4.close();
+
+		std::cout << "file 4 with xor data was created\n";
 	}
 	if (((int)fe->d1 + (int) fe->d2 + (int) fe->d3) <= 1)
 	{
-		std::cout << "not enough files for recovery";
+		std::cout << "not enough files for recovery\n";
 		return;
 	}
 
@@ -116,6 +120,7 @@ void readFiles(const FilesExists* fe) {
 		buffer_used = 1;
 		int l1 = d1.gcount();
 		d1.close();
+		std::cout << "file 1 was read\n";
 	}
 
 	if (fe->d2)
@@ -131,6 +136,7 @@ void readFiles(const FilesExists* fe) {
 		
 		int l2 = d1.gcount();
 		d1.close();
+		std::cout << "file 2 was read\n";
 	}
 
 	if (fe->d3)
@@ -139,6 +145,7 @@ void readFiles(const FilesExists* fe) {
 		d1.read(b2, 1024);
 		int l3 = d1.gcount();
 		d1.close();
+		std::cout << "file 3 was read\n";
 	}
 
 	for (size_t i = 0; i <= len - 1; i++)
@@ -163,6 +170,7 @@ void readFiles(const FilesExists* fe) {
 	std::ofstream d0(drive_name, std::ios::out | std::ios::binary | std::ios::app);
 	d0.write(xor_, len);
 	d0.close();
+	std::cout << "file " << drive_name << " was recovered \n";
 }
 
 FilesExists checkFilesExists()
